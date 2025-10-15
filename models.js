@@ -69,10 +69,32 @@ const Product = seq.define("product", {
 });
 
 
+const Post = seq.define("post", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    title: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    body: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    }
+});
+
+
+
+
 User.hasMany(Product, { onDelete: "CASCADE" });
 Product.belongsTo(User);
 
 Category.hasMany(Product, { onDelete: "CASCADE" });
 Product.belongsTo(Category);
 
-export { User, Category, Product };
+User.hasMany(Post, {onDelete: "CASCADE"});
+Post.belongsTo(User);
+
+export { User, Category, Product, Post };
